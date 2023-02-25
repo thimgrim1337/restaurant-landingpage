@@ -12,11 +12,13 @@ const createUlList = () => {
   options.forEach((option) => {
     const li = document.createElement('li');
     const a = document.createElement('a');
-    a.href = '#';
+    a.setAttribute('href', '#');
     a.textContent = option;
     li.appendChild(a);
     ul.appendChild(li);
   });
+
+  ul.firstChild.classList.add('active');
   return ul;
 };
 
