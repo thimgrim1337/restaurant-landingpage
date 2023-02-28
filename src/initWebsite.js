@@ -8,10 +8,16 @@ const initWebsite = () => {
   website.appendChild(createMain());
   website.appendChild(createFooter());
 
+  initNav();
+};
+
+const initNav = () => {
   const links = document.querySelectorAll('nav li');
   links.forEach((link) =>
     link.addEventListener('click', () => {
       replaceContent(link);
+      links.forEach((link) => link.classList.remove('active'));
+      link.classList.add('active');
     })
   );
 };
