@@ -1,11 +1,13 @@
 import restaurantImg from './assets/img/restaurant.jpg';
 import burgerImg from './assets/img/burger.jpg';
+import map from './assets/img/map.png';
 import createNav from './Nav';
 
 const createMain = () => {
   const main = document.createElement('main');
+
   main.appendChild(createNav());
-  main.appendChild(createMenuContent());
+  main.appendChild(renderContent());
 
   return main;
 };
@@ -63,10 +65,41 @@ const createMenuContent = () => {
   return menu;
 };
 
+const createContactContent = () => {
+  const div = document.createElement('div');
+  const h2 = document.createElement('h2');
+  const p = document.createElement('p');
+  const img = createImg(map);
+
+  h2.textContent = 'Meet us';
+  h2.classList.add('lobster');
+  p.innerHTML =
+    'Unknown street 2/1 <br/> 09000 Płock, Poland <br/> Tel.: +48 777 777 777 <br/>bestburgers@burgers.com';
+  div.classList.add('contact', 'frame');
+
+  div.append(img, h2, p);
+
+  return div;
+};
+
+const renderContent = (page = 'Home') => {
+  if (page == 'Home') return createHomeContent();
+  else if (page == 'Menu') return createMenuContent();
+  else if (page == 'Contact') return createContactContent();
+  else return;
+};
+
+const replaceContent = (page) => {
+  const main = document.querySelector('main');
+  const mainContent = document.querySelector('.frame');
+  main.removeChild(mainContent);
+  main.appendChild(renderContent(page.textContent));
+};
+
 const createImg = (src) => {
   const img = document.createElement('img');
   img.src = src;
   return img;
 };
 
-export default createMain;
+export { createMain, replaceContent };
